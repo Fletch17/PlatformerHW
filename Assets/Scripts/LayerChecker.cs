@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LayerCheck : MonoBehaviour
+public class LayerChecker : MonoBehaviour
 {
     [SerializeField] LayerMask _layerMask;
 

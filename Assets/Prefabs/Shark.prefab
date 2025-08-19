@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 137970278090043791}
   - component: {fileID: 8979627809812359967}
   m_Layer: 8
-  m_Name: GroundCheckForPatrol
+  m_Name: GroundCheckForPatroler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8763948619483312514}
   - component: {fileID: 3304546641042643848}
   m_Layer: 8
-  m_Name: GroundCheck
+  m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 1308933159464989734}
   - component: {fileID: 9145604982952667928}
   - component: {fileID: 2545182599478058258}
+  - component: {fileID: 7669707721953306988}
   m_Layer: 8
   m_Name: Shark
   m_TagString: Untagged
@@ -283,7 +284,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &4452186257081139662
 CapsuleCollider2D:
@@ -317,8 +318,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012728214, y: -0.05595267}
-  m_Size: {x: 0.5788183, y: 0.7331526}
+  m_Offset: {x: 0.012728214, y: -0.05306375}
+  m_Size: {x: 0.5788183, y: 0.7273748}
   m_Direction: 0
 --- !u!95 &1624059503508628685
 Animator:
@@ -353,11 +354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66c994924b6ea941976e2c07f1ccc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
   _animator: {fileID: 1624059503508628685}
-  _jumpPower: 7
-  _groundCheck: {fileID: 8763948619483312514}
-  _isFlipX: 1
+  _speed: 2
+  _invertSprite: 1
+  _groundChecker: {fileID: 8763948619483312514}
 --- !u!114 &9145604982952667928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,3 +385,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _patrolType: {fileID: 9145604982952667928}
+--- !u!114 &7669707721953306988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284609035919156978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b41d668ba88af140978798d1ae27dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _object: {fileID: 65627197558832857}
+  _invertSprite: 1

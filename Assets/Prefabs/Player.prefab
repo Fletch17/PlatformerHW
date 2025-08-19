@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 6372192629840971427}
   - component: {fileID: 712434519746161516}
   - component: {fileID: 6363367669088039381}
+  - component: {fileID: 7006298834555327352}
+  - component: {fileID: 4012902766647651905}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -186,11 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72af67066ed97164bbab113f1a209b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
   _animator: {fileID: 1505338875582359742}
-  _jumpPower: 8
-  _groundCheck: {fileID: 3643718074070820464}
-  _isFlipX: 0
+  _speed: 2
+  _invertSprite: 0
+  _groundChecker: {fileID: 3643718074070820464}
 --- !u!114 &712434519746161516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f8ea22a345ab547b7d6831db9e35ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 6372192629840971427}
 --- !u!114 &6363367669088039381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +234,33 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7006298834555327352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096926197141656027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b41d668ba88af140978798d1ae27dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _object: {fileID: 3465523779427572081}
+  _invertSprite: 0
+--- !u!114 &4012902766647651905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096926197141656027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0bf5302dd61e4343bfe366e9173aaef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpPower: 6
 --- !u!1 &5026131255628686436
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +273,7 @@ GameObject:
   - component: {fileID: 3889995946357311275}
   - component: {fileID: 3643718074070820464}
   m_Layer: 3
-  m_Name: GroundCheck
+  m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

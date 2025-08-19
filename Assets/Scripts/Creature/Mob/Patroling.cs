@@ -4,7 +4,7 @@ using UnityEngine;
 public class Patroling : MonoBehaviour
 {
     [SerializeField] private Creature _creature;
-    [SerializeField] private LayerCheck _groundCheck;
+    [SerializeField] private LayerChecker _groundChecker;
 
     private float _directionX = 1;
 
@@ -12,13 +12,13 @@ public class Patroling : MonoBehaviour
     {
         while (enabled)
         {
-            if (!_groundCheck.IsTouching)
+            if (!_groundChecker.IsTouching)
             {
                 _directionX *= -1;
             }
-            _creature.SetDirection(new Vector2(_directionX, 0));
 
-            yield return new WaitForFixedUpdate();
+            _creature.SetDirection(new Vector2(_directionX, 0));
+            yield return null;
         }
     }
 }
