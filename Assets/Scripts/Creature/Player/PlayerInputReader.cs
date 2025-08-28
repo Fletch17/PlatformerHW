@@ -3,12 +3,23 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputReader : MonoBehaviour
 {
-    private Vector2 _direction;
+    public Vector2 Direction { get; private set; }
+    public bool IsAttack { get; private set; }
 
-    public Vector2 Direction => _direction;
-
-    public void OnMovement(InputValue contex)
+    public void OnMovement(InputAction.CallbackContext context)
     {
-        _direction= contex.Get<Vector2>();
+        Direction = context.ReadValue<Vector2>();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            IsAttack = true;
+        }
+        else
+        {
+            IsAttack = false;
+        }
     }
 }

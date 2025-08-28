@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Player : Creature
 {
-    private int _coinCount;
+    [SerializeField] private ItemPeacker _itemPeacker;
+
+    private CoinCounter _coinCounter;
     private Jumper _jumper;
     private PlayerInputReader _playerInputReader;
 
@@ -10,6 +12,11 @@ public class Player : Creature
     {
         base.Update();
         _direction = _playerInputReader.Direction;
+
+        if (_playerInputReader.IsAttack)
+        {
+            Attack();
+        }
     }
 
     protected override void Awake()
@@ -17,16 +24,25 @@ public class Player : Creature
         base.Awake();
         _playerInputReader = GetComponent<PlayerInputReader>();
         _jumper = GetComponent<Jumper>();
+        _coinCounter = GetComponent<CoinCounter>();
+    }
+
+    protected override void OnEnable()
+    {
+        _itemPeacker.CoinPeaked += _coinCounter.Increase;
+        _itemPeacker.PotionPeaked += _health.Increase;
+        base.OnEnable();
+    }
+
+    protected override void OnDisable()
+    {
+        _itemPeacker.CoinPeaked -= _coinCounter.Increase;
+        _itemPeacker.PotionPeaked -= _health.Increase;
+        base.OnDisable();
     }
 
     protected override float CalculateYVelocity()
     {
         return _jumper.CalculateYVelocity(_direction, _isGrounded);
-    }
-
-    public void IncreaseCoinCount(int count)
-    {
-        _coinCount += count;
-    }
-
+    }       
 }

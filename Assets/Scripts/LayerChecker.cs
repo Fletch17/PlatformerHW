@@ -1,25 +1,39 @@
+using System;
 using UnityEngine;
 
 public class LayerChecker : MonoBehaviour
 {
-    [SerializeField] LayerMask _layerMask;
+    [SerializeField] protected LayerMask _layerMask;
 
-    private Collider2D _collider2D;
+    protected Collider2D _collider2D;
+    protected bool _isTouching;
 
-    public bool IsTouching {  get; private set; }
+    public event Action LayerTouched;
+
+    public bool IsTouching => _isTouching;
 
     private void Awake()
     {
         _collider2D = GetComponent<Collider2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        IsTouching = _collider2D.IsTouchingLayers(_layerMask);
+        _isTouching = _collider2D.IsTouchingLayers(_layerMask);
+
+        if (IsTouching)
+        {
+            LayerTouched?.Invoke();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        IsTouching = _collider2D.IsTouchingLayers(_layerMask);
+        _isTouching = _collider2D.IsTouchingLayers(_layerMask);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        _isTouching = _collider2D.IsTouchingLayers(_layerMask);
     }
 }

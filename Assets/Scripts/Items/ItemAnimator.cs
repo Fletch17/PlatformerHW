@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 
-public class CoinAnimator : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class ItemAnimator : MonoBehaviour
 {
     private Animator _animator;
 
-    private const string IsDestroy = nameof(IsDestroy);
+    private const string OnDestroy = nameof(OnDestroy);
 
     private void Awake()
     {
@@ -14,7 +15,7 @@ public class CoinAnimator : MonoBehaviour
 
     public void PlayDestroyAnimation()
     {
-        _animator.SetBool(IsDestroy, true);
+        _animator.SetTrigger(OnDestroy);
     }
 
     private void Destroy()

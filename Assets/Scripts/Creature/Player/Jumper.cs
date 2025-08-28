@@ -8,6 +8,7 @@ public class Jumper : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
     private bool _isJumping;
+    private float _velocityYTreshold = 0.001f;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class Jumper : MonoBehaviour
         if (isJumpPressing)
         {
             _isJumping = true;
-            var isFalling = _rigidbody2D.velocity.y <= 0.001f;
+            var isFalling = _rigidbody2D.velocity.y <= _velocityYTreshold;
 
             yVelocity = isFalling ? CalculateJumpVelocity(yVelocity, isGrounded) : yVelocity;
         }
