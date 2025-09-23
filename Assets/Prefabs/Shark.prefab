@@ -94,8 +94,9 @@ GameObject:
   - component: {fileID: 2879947703837796421}
   - component: {fileID: 6072694595366748283}
   - component: {fileID: 5412021954419524904}
+  - component: {fileID: 7537168409289646366}
   m_Layer: 7
-  m_Name: AttackChecker
+  m_Name: AttackCheckerAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,6 +167,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
+--- !u!114 &7537168409289646366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300447414930839176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a1a1ffe619dc994498ffbe2750f042a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &3359844491501433254
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,8 +240,9 @@ GameObject:
   m_Component:
   - component: {fileID: 440239970971975810}
   - component: {fileID: 2225916514715713143}
+  - component: {fileID: 8177211374390361435}
   m_Layer: 7
-  m_Name: VisionChecker
+  m_Name: VisionCheckerAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,6 +308,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &8177211374390361435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404903850844638383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b94059ba1f0f79419f6b310bc808703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &6284609035919156978
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,10 +337,12 @@ GameObject:
   - component: {fileID: 4452186257081139662}
   - component: {fileID: 1624059503508628685}
   - component: {fileID: 1308933159464989734}
-  - component: {fileID: 9145604982952667928}
   - component: {fileID: 2545182599478058258}
   - component: {fileID: 7669707721953306988}
   - component: {fileID: 781021734247321241}
+  - component: {fileID: 7640956738489937298}
+  - component: {fileID: 994603683070766777}
+  - component: {fileID: 1503349949457220619}
   m_Layer: 7
   m_Name: Shark
   m_TagString: Untagged
@@ -483,24 +517,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66c994924b6ea941976e2c07f1ccc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackChecker: {fileID: 8851716315286209318}
   _speed: 1.5
   _invertSprite: 1
   _groundChecker: {fileID: 886659019850809767}
---- !u!114 &9145604982952667928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6284609035919156978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdaf0472d153b56409c397f4f2619260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _creature: {fileID: 1308933159464989734}
-  _groundChecker: {fileID: 8979627809812359967}
 --- !u!114 &2545182599478058258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,12 +532,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43871ec2c7ad93149a733b30d753599c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrolType: {fileID: 9145604982952667928}
-  _visionChecker: {fileID: 0}
-  _attackChecker: {fileID: 0}
+  _visionChecker: {fileID: 8177211374390361435}
+  _attackChecker: {fileID: 6072694595366748283}
   _horizontalTreshold: 0.2
   _alarmDelay: 1
   _missHeroCooldown: 0.5
+  _groundChecker: {fileID: 8979627809812359967}
+  _player: {fileID: 0}
 --- !u!114 &7669707721953306988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +565,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84047642ec277145979957877fa0f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 2
+  _max: 2
+--- !u!114 &7640956738489937298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284609035919156978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315535a01d6c5654ea62af7ce198a815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _attackSpeed: 0.5
+  _attackChecker: {fileID: 6216125049512894786}
+--- !u!114 &994603683070766777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284609035919156978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315535a01d6c5654ea62af7ce198a815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _attackSpeed: 0.5
+  _attackChecker: {fileID: 6216125049512894786}
+--- !u!114 &1503349949457220619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284609035919156978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d348daa928eff4b8ded66577ff96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8397542402731857756
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4752326933880704522}
-  - component: {fileID: 8851716315286209318}
+  - component: {fileID: 6216125049512894786}
   m_Layer: 7
   m_Name: AttackArea
   m_TagString: Untagged
@@ -578,7 +640,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 65627197558832857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8851716315286209318
+--- !u!114 &6216125049512894786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,12 +649,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8397542402731857756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315535a01d6c5654ea62af7ce198a815, type: 3}
+  m_Script: {fileID: 11500000, guid: 340dce002c10ddf46a2eed3ff4cdf4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
-  _radius: 0.25
+  _radius: 0.2
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
-  _attackSpeed: 0.5

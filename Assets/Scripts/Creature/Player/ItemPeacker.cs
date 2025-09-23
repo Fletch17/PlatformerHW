@@ -16,7 +16,7 @@ public class ItemPeacker : MonoBehaviour
         }
         else if (collision.TryGetComponent(out HealthPotion healthPotion))
         {
-            PotionPeaked?.Invoke(healthPotion.HpCount);
+            PotionPeaked?.Invoke(healthPotion.HealthPointCount);
             healthPotion.StartDestroy();
         }
     }

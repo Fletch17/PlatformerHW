@@ -3,41 +3,41 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _max;
 
-    private int _currentHealth;
+    private int _current;
 
     public event Action OnHit;
     public event Action OnDie;
 
     private void Awake()
     {
-        _currentHealth = _maxHealth;
+        _current = _max;
     }
 
     public void Increase(int health)
     {
-        _currentHealth += health;
+        _current += health;
 
-        if (_currentHealth > _maxHealth)
+        if (_current > _max)
         {
-            _currentHealth = _maxHealth;
+            _current = _max;
         }
 
-        Debug.Log(gameObject+": Increase. Curr: " +_currentHealth);
+        Debug.Log(gameObject+": Increase. Curr: " +_current);
     }
 
     public void Decrease(int health)
     {
-        _currentHealth -= health;
+        _current -= health;
         OnHit?.Invoke();
 
-        if (_currentHealth <= 0)
+        if (_current <= 0)
         {
-            _currentHealth = 0;
+            _current = 0;
             OnDie?.Invoke();
         }
 
-        Debug.Log(gameObject + ": Decrease. Curr: " + _currentHealth);
+        Debug.Log(gameObject + ": Decrease. Curr: " + _current);
     }
 }

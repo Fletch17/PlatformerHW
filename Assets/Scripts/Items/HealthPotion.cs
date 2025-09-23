@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthPotion : Item
 {
-    [SerializeField] private int _hpCount;
+    [SerializeField] private int _healthPointCount;
 
-    public int HpCount => _hpCount;
+    public int HealthPointCount => _healthPointCount;
 }

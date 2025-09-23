@@ -8,17 +8,6 @@ public class Player : Creature
     private Jumper _jumper;
     private PlayerInputReader _playerInputReader;
 
-    protected override void Update()
-    {
-        base.Update();
-        _direction = _playerInputReader.Direction;
-
-        if (_playerInputReader.IsAttack)
-        {
-            Attack();
-        }
-    }
-
     protected override void Awake()
     {
         base.Awake();
@@ -32,6 +21,17 @@ public class Player : Creature
         _itemPeacker.CoinPeaked += _coinCounter.Increase;
         _itemPeacker.PotionPeaked += _health.Increase;
         base.OnEnable();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        _direction = _playerInputReader.Direction;
+
+        if (_playerInputReader.IsAttack)
+        {
+            Attack();
+        }
     }
 
     protected override void OnDisable()

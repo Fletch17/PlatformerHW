@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Creature : MonoBehaviour
 {
-    [SerializeField] protected AttackChecker _attackChecker;
     [SerializeField] private float _speed;
     [SerializeField] private bool _invertSprite;
     [SerializeField] private GroundChecker _groundChecker;
@@ -12,6 +11,7 @@ public class Creature : MonoBehaviour
     protected Animator _animator;
     protected Health _health;
 
+    private Attacker _attacker;
     private Rigidbody2D _rigidbody2D;
     private Rotator _rotator;
     private Collider2D _collider2D;
@@ -25,6 +25,7 @@ public class Creature : MonoBehaviour
 
     protected virtual void Awake()
     {
+        _attacker=GetComponent<Attacker>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rotator = GetComponent<Rotator>();
         _health = GetComponent<Health>();
@@ -32,9 +33,10 @@ public class Creature : MonoBehaviour
         _collider2D=GetComponent<Collider2D>();
     }
 
-    protected virtual void Update()
+    protected virtual void OnEnable()
     {
-        _isGrounded = _groundChecker.IsGround;        
+        _health.OnHit += Hit;
+        _health.OnDie += Die;
     }
 
     private void FixedUpdate()
@@ -50,17 +52,16 @@ public class Creature : MonoBehaviour
         _rotator.RotateSprite(_direction);
     }
 
-    protected virtual void OnEnable()
+    protected virtual void Update()
     {
-        _health.OnHit += Hit;
-        _health.OnDie += Die;
+        _isGrounded = _groundChecker.IsGround;
     }
 
-    protected virtual void OnDisable()    
+    protected virtual void OnDisable()
     {
         _health.OnHit -= Hit;
         _health.OnDie -= Die;
-    }
+    }  
 
     public void SetDirection(Vector2 direction)
     {
@@ -74,10 +75,10 @@ public class Creature : MonoBehaviour
 
     public void Attack()
     {
-        if (_attackChecker.CanAttack)
+        if (_attacker.CanAttack)
         {
             _animator.SetTrigger(OnAttack);
-            _attackChecker.Attack();
+            _attacker.Attack();
         }
     }
 

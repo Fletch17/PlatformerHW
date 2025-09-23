@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5988611406043961197}
   - component: {fileID: 8153966590903107814}
   - component: {fileID: 2540482089913394668}
+  - component: {fileID: 6962237785038918418}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -192,7 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72af67066ed97164bbab113f1a209b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackChecker: {fileID: 4053594901794609200}
   _speed: 2
   _invertSprite: 0
   _groundChecker: {fileID: 123297981864736894}
@@ -350,7 +350,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84047642ec277145979957877fa0f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 3
+  _max: 3
+--- !u!114 &6962237785038918418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096926197141656027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315535a01d6c5654ea62af7ce198a815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _attackSpeed: 1
+  _attackChecker: {fileID: 4301836840406963613}
 --- !u!1 &5026131255628686436
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797658619459796166}
-  - component: {fileID: 4053594901794609200}
+  - component: {fileID: 4301836840406963613}
   m_Layer: 6
   m_Name: AttackChecker
   m_TagString: Untagged
@@ -511,7 +526,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3465523779427572081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4053594901794609200
+--- !u!114 &4301836840406963613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -520,12 +535,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7605334881919062030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315535a01d6c5654ea62af7ce198a815, type: 3}
+  m_Script: {fileID: 11500000, guid: 340dce002c10ddf46a2eed3ff4cdf4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
-  _radius: 0.3
+  _radius: 0.25
   _layerMask:
     serializedVersion: 2
     m_Bits: 128
-  _attackSpeed: 1
