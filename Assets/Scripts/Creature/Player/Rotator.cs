@@ -1,12 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
-    [SerializeField] private Transform _object;
     [SerializeField] private bool _invertSprite;
-    
+
+    private Transform _object;
+
+    private void Awake()
+    {
+        _object = GetComponentInParent<Transform>();
+    }
+
     public void RotateSprite(Vector3 direction)
     {
         var _rightRotation = _invertSprite ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);

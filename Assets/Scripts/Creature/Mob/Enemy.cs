@@ -1,22 +1,24 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Creature))]
+[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(EnemyStateMachineFactory))]
+[RequireComponent(typeof(Follower))]
+[RequireComponent(typeof(Patroller))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private ColliderPlayerChecker _visionChecker;
     [SerializeField] private LayerChecker _attackChecker;
-    [SerializeField] private float _horizontalTreshold = 0.2f;
     [SerializeField] private float _alarmDelay = 1f;
     [SerializeField] private float _missHeroCooldown = 0.5f;
-    [SerializeField] private StateMachine _stateMachine;
-    [SerializeField] private LayerChecker _groundChecker;
-    [SerializeField] private Player _player;
 
+    private Follower _follower;
+    private Patroller _patroller;
+    private StateMachine _stateMachine;
     private Creature _creature;
     private Health _health;
-    private float _directionX = 1;
     private float _time = -10f;
 
-    public bool IsDead { get; private set; }
     public bool IsAlarmEnded => _time + _alarmDelay < Time.time;
     public bool IsHeroMiss => _time + _missHeroCooldown < Time.time;
     public bool CanAttack => _attackChecker.IsTouching;
@@ -24,15 +26,18 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        IsDead = false;
+        _follower = GetComponent<Follower>();
+        _patroller = GetComponent<Patroller>();
+        _health = GetComponent<Health>();
         _creature = GetComponent<Creature>();
         _health = GetComponent<Health>();
-        _stateMachine = GetComponent<EnemyStateMachineFactory>().Create(this, _player);
+        _stateMachine = GetComponent<EnemyStateMachineFactory>().Create(this);
     }
 
     private void OnEnable()
     {
-        _health.OnDie += SetDeadStatus;
+        _health.Died += SetDeadStatus;
+        _visionChecker.PlayerTouched += _follower.RefreshTarget;
     }
 
     private void Update()
@@ -42,28 +47,17 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
-        _health.OnDie -= SetDeadStatus;
+        _health.Died -= SetDeadStatus;
+        _visionChecker.PlayerTouched -= _follower.RefreshTarget;
     }
 
     public void Patrol()
     {
         if (IsHeroMiss)
         {
-            if (!_groundChecker.IsTouching)
-            {
-                _directionX *= -1;
-            }
-
-            _creature.SetDirection(new Vector2(_directionX, 0));
+            _patroller.Patrol();
         }
-    }
-
-    private void SetDeadStatus()
-    {
-        IsDead = true;
-        StopRuning();
-        _stateMachine = null;
-    }
+    }     
 
     public void StopRuning()
     {
@@ -81,24 +75,18 @@ public class Enemy : MonoBehaviour
         _time = Time.time;
     }
 
-    public void FollowTarget(Player player)
+    public void FollowTarget()
     {
         if (IsAlarmEnded)
         {
-            var horizontalDelta = Mathf.Abs(player.transform.position.x - transform.position.x);
-            Vector2 direction;
-
-            if (horizontalDelta <= _horizontalTreshold)
-            {
-                direction = Vector2.zero;
-            }
-            else
-            {
-                direction = player.transform.position - transform.position;
-                direction.y = 0;
-            }
-
-            _creature.SetDirection(direction.normalized);
+            _follower.FollowTarget();
         }
     }
+
+    private void SetDeadStatus()
+    {
+        StopRuning();
+        _stateMachine.Stop();
+        _stateMachine = null;
+    }    
 }

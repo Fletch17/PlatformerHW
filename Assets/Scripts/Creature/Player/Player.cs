@@ -1,5 +1,8 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CoinCounter))]
+[RequireComponent(typeof(Jumper))]
+[RequireComponent(typeof(PlayerInputReader))]
 public class Player : Creature
 {
     [SerializeField] private ItemPeacker _itemPeacker;
@@ -23,9 +26,8 @@ public class Player : Creature
         base.OnEnable();
     }
 
-    protected override void Update()
-    {
-        base.Update();
+    private void Update()
+    {      
         _direction = _playerInputReader.Direction;
 
         if (_playerInputReader.IsAttack)

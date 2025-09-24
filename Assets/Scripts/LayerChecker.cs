@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class LayerChecker : MonoBehaviour
 {
     [SerializeField] protected LayerMask _layerMask;

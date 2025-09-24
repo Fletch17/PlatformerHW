@@ -7,8 +7,8 @@ public class Health : MonoBehaviour
 
     private int _current;
 
-    public event Action OnHit;
-    public event Action OnDie;
+    public event Action Hited;
+    public event Action Died;
 
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
 
     public void Increase(int health)
     {
-        _current += health;
+        _current += Math.Abs(health);
 
         if (_current > _max)
         {
@@ -29,13 +29,13 @@ public class Health : MonoBehaviour
 
     public void Decrease(int health)
     {
-        _current -= health;
-        OnHit?.Invoke();
+        _current -= Math.Abs(health);
+        Hited?.Invoke();
 
         if (_current <= 0)
         {
             _current = 0;
-            OnDie?.Invoke();
+            Died?.Invoke();
         }
 
         Debug.Log(gameObject + ": Decrease. Curr: " + _current);

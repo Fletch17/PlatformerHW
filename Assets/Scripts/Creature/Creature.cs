@@ -1,5 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(CreatureAnimator))]
+[RequireComponent(typeof(Attacker))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rotator))]
 public class Creature : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -8,20 +13,13 @@ public class Creature : MonoBehaviour
 
     protected bool _isGrounded;
     protected Vector2 _direction;
-    protected Animator _animator;
     protected Health _health;
 
+    private CreatureAnimator _creatureAnimator;
     private Attacker _attacker;
     private Rigidbody2D _rigidbody2D;
     private Rotator _rotator;
-    private Collider2D _collider2D;
-
-    private const string IsRunning = nameof(IsRunning);
-    private const string IsOnGround = nameof(IsOnGround);
-    private const string VerticalVelocity = nameof(VerticalVelocity);
-    private const string OnAttack = nameof(OnAttack);
-    private const string OnHit = nameof(OnHit);
-    private const string IsDead = nameof(IsDead);
+    private Collider2D _collider2D;      
 
     protected virtual void Awake()
     {
@@ -29,38 +27,31 @@ public class Creature : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rotator = GetComponent<Rotator>();
         _health = GetComponent<Health>();
-        _animator= GetComponent<Animator>();
-        _collider2D=GetComponent<Collider2D>();
+        _creatureAnimator = GetComponent<CreatureAnimator>();
+        _collider2D =GetComponent<Collider2D>();
     }
 
     protected virtual void OnEnable()
     {
-        _health.OnHit += Hit;
-        _health.OnDie += Die;
+        _health.Hited += Hit;
+        _health.Died += Die;
     }
 
     private void FixedUpdate()
     {
+        _isGrounded = _groundChecker.IsGround;
         var xVelocity = _direction.x * _speed;
         var yVelocity = CalculateYVelocity();
         _rigidbody2D.velocity = new Vector2(xVelocity, yVelocity);
 
-        _animator.SetBool(IsRunning, _direction.x != 0);
-        _animator.SetBool(IsOnGround, _isGrounded);
-        _animator.SetFloat(VerticalVelocity, yVelocity);
-
+        _creatureAnimator.PlayMovementAnimation(_direction.x != 0, _isGrounded, yVelocity);
         _rotator.RotateSprite(_direction);
-    }
-
-    protected virtual void Update()
-    {
-        _isGrounded = _groundChecker.IsGround;
     }
 
     protected virtual void OnDisable()
     {
-        _health.OnHit -= Hit;
-        _health.OnDie -= Die;
+        _health.Hited -= Hit;
+        _health.Died -= Die;
     }  
 
     public void SetDirection(Vector2 direction)
@@ -77,20 +68,20 @@ public class Creature : MonoBehaviour
     {
         if (_attacker.CanAttack)
         {
-            _animator.SetTrigger(OnAttack);
+            _creatureAnimator.PlayAttack();
             _attacker.Attack();
         }
     }
 
     private void Die()
     {
-        _animator.SetBool(IsDead, true);
+        _creatureAnimator.PlayDeath();
         _rigidbody2D.simulated = false;
         _collider2D.enabled = false;
     }
 
     private void Hit()
     {
-        _animator.SetTrigger(OnHit);
+        _creatureAnimator.PlayHit();
     }
 }

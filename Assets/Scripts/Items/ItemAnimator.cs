@@ -3,9 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class ItemAnimator : MonoBehaviour
 {
-    private Animator _animator;
+    public static readonly int OnDestroy = Animator.StringToHash(nameof(OnDestroy));
 
-    private const string OnDestroy = nameof(OnDestroy);
+    private Animator _animator;   
 
     private void Awake()
     {

@@ -1,12 +1,10 @@
 public class FollowTargetState : State
 {
     private Enemy _enemy;
-    private Player _player;
 
-    public FollowTargetState(IStateChanger stateChanger, Enemy enemy, Player player): base(stateChanger)
+    public FollowTargetState(IStateChanger stateChanger, Enemy enemy): base(stateChanger)
     {
         _enemy = enemy;
-        _player = player;
     }
 
     public override void Enter()
@@ -17,6 +15,6 @@ public class FollowTargetState : State
 
     protected override void OnUpdate()
     {        
-        _enemy.FollowTarget(_player);
+        _enemy.FollowTarget();
     }
 }

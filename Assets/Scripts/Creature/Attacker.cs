@@ -5,7 +5,7 @@ public class Attacker : MonoBehaviour
 {
     [SerializeField] private int _damage;
     [SerializeField] private float _attackSpeed;
-    [SerializeField] private AttackChecker _attackChecker;
+    [SerializeField] private HealthChecker _healthChecker;
 
     private float _attackPause;
     private float _time;
@@ -20,7 +20,7 @@ public class Attacker : MonoBehaviour
 
     public void Attack()
     {
-        if (_attackChecker.TryCheckHealthComponent(out List<Health> healths))
+        if (_healthChecker.TryCheckHealthComponent(out List<Health> healths))
         {
             foreach (Health health in healths)
             {

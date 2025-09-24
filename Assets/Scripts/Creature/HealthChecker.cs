@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackChecker : MonoBehaviour
+public class HealthChecker : MonoBehaviour
 {
     [SerializeField] private float _radius;
     [SerializeField] private LayerMask _layerMask;
@@ -10,6 +10,7 @@ public class AttackChecker : MonoBehaviour
 
     public bool TryCheckHealthComponent(out List<Health> healths)
     {
+        bool isComponentExist = false;
         healths = new List<Health>();
         Collider2D[] result = new Collider2D[_arraySize];
         int size = Physics2D.OverlapCircleNonAlloc(transform.position, _radius, result, _layerMask);
@@ -19,17 +20,11 @@ public class AttackChecker : MonoBehaviour
             if (result[i].TryGetComponent(out Health health))
             {
                 healths.Add(health);
+                isComponentExist = true;
             }
         }
 
-        if (healths.Count > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return isComponentExist;
     }
 
     private void OnDrawGizmos()

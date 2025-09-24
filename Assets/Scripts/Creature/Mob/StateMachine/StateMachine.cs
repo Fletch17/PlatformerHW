@@ -11,6 +11,11 @@ public class StateMachine : IStateChanger
         _currentState?.Enter();
     }
 
+    public void Stop()
+    {
+        _currentState=null;
+    }
+
     public void Update()
     {
         Debug.Log(_currentState.GetType());
