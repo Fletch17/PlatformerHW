@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1a1ffe619dc994498ffbe2750f042a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
+  LayerMask:
     serializedVersion: 2
     m_Bits: 256
 --- !u!1 &3300447414930839176
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5412021954419524904}
   - component: {fileID: 7537168409289646366}
   m_Layer: 7
-  m_Name: AttackCheckerAI
+  m_Name: AttackChecker(LayerChecker)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1a1ffe619dc994498ffbe2750f042a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
+  LayerMask:
     serializedVersion: 2
     m_Bits: 64
 --- !u!1 &3359844491501433254
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 2225916514715713143}
   - component: {fileID: 8177211374390361435}
   m_Layer: 7
-  m_Name: VisionCheckerAI
+  m_Name: VisionChecker(ColliderPlayerChecker)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b94059ba1f0f79419f6b310bc808703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
+  LayerMask:
     serializedVersion: 2
     m_Bits: 64
 --- !u!1 &6284609035919156978
@@ -327,6 +327,8 @@ GameObject:
   - component: {fileID: 994603683070766777}
   - component: {fileID: 1503349949457220619}
   - component: {fileID: 5015547188095142579}
+  - component: {fileID: 4710641393250481146}
+  - component: {fileID: 7819183213086395715}
   m_Layer: 7
   m_Name: Shark
   m_TagString: Untagged
@@ -518,11 +520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visionChecker: {fileID: 8177211374390361435}
   _attackChecker: {fileID: 7537168409289646366}
-  _horizontalTreshold: 0.2
   _alarmDelay: 1
   _missHeroCooldown: 0.5
-  _groundChecker: {fileID: 8979627809812359967}
-  _player: {fileID: 0}
 --- !u!114 &7669707721953306988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b41d668ba88af140978798d1ae27dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _object: {fileID: 65627197558832857}
   _invertSprite: 1
 --- !u!114 &781021734247321241
 MonoBehaviour:
@@ -589,6 +587,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961f13e0dbd34f94f8b67e62499b6508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4710641393250481146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284609035919156978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e088a24e73c5f8647be0c0bd31cd2800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _horizontalTreshold: 0.2
+--- !u!114 &7819183213086395715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284609035919156978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220bb76ab184eeb499bd8c3ddb922897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundChecker: {fileID: 8979627809812359967}
 --- !u!1 &8397542402731857756
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +624,7 @@ GameObject:
   - component: {fileID: 4752326933880704522}
   - component: {fileID: 1066002550895970431}
   m_Layer: 7
-  m_Name: AttackArea
+  m_Name: AttackArea(HeathChecker)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

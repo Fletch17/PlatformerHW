@@ -10,7 +10,7 @@ public class LayerCollisionChecker : MonoBehaviour
 
     public event Action LayerTouched;
 
-    public bool IsTouching { get; protected set; };
+    public bool IsTouching { get; protected set; }
 
     private void Awake()
     {
