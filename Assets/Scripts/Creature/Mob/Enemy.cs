@@ -59,14 +59,14 @@ public class Enemy : MonoBehaviour
         }
     }     
 
-    public void StopRuning()
+    public void StopRunning()
     {
         _creature.SetDirection(Vector2.zero);
     }
 
     public void Attack()
     {
-        StopRuning();
+        StopRunning();
         _creature.Attack();
     }
 
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
 
     private void SetDeadStatus()
     {
-        StopRuning();
+        StopRunning();
         _stateMachine.Stop();
         _stateMachine = null;
     }    

@@ -9,6 +9,6 @@ public class AgrToHeroState : State
 
     protected override void OnUpdate()
     {
-        _enemy.StopRuning();
+        _enemy.StopRunning();
     }
 }

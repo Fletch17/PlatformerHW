@@ -9,7 +9,7 @@ public class FollowTargetState : State
 
     public override void Enter()
     {
-        _enemy.StopRuning();
+        _enemy.StopRunning();
         _enemy.UpdateTime();
     }
 
