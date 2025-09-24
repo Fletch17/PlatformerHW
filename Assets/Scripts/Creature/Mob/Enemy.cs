@@ -7,8 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(Patroller))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private ColliderPlayerChecker _visionChecker;
-    [SerializeField] private LayerChecker _attackChecker;
+    [SerializeField] private PlayerCollisionChecker _visionChecker;
+    [SerializeField] private LayerCollisionChecker _attackChecker;
     [SerializeField] private float _alarmDelay = 1f;
     [SerializeField] private float _missHeroCooldown = 0.5f;
 

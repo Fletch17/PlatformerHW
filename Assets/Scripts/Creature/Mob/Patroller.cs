@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Patroller : MonoBehaviour
 {
-    [SerializeField] private LayerChecker _groundChecker;
+    [SerializeField] private LayerCollisionChecker _groundChecker;
 
     private Creature _creature;
     private float _directionX = 1;

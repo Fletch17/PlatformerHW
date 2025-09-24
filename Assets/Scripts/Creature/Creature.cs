@@ -11,9 +11,9 @@ public class Creature : MonoBehaviour
     [SerializeField] private bool _invertSprite;
     [SerializeField] private GroundChecker _groundChecker;
 
-    protected bool _isGrounded;
-    protected Vector2 _direction;
-    protected Health _health;
+    protected bool IsGrounded;
+    protected Vector2 Direction;
+    protected Health Health;
 
     private CreatureAnimator _creatureAnimator;
     private Attacker _attacker;
@@ -26,37 +26,37 @@ public class Creature : MonoBehaviour
         _attacker=GetComponent<Attacker>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rotator = GetComponent<Rotator>();
-        _health = GetComponent<Health>();
+        Health = GetComponent<Health>();
         _creatureAnimator = GetComponent<CreatureAnimator>();
         _collider2D =GetComponent<Collider2D>();
     }
 
     protected virtual void OnEnable()
     {
-        _health.Hited += Hit;
-        _health.Died += Die;
+        Health.Hited += Hit;
+        Health.Died += Die;
     }
 
     private void FixedUpdate()
     {
-        _isGrounded = _groundChecker.IsGround;
-        var xVelocity = _direction.x * _speed;
+        IsGrounded = _groundChecker.IsGround;
+        var xVelocity = Direction.x * _speed;
         var yVelocity = CalculateYVelocity();
         _rigidbody2D.velocity = new Vector2(xVelocity, yVelocity);
 
-        _creatureAnimator.PlayMovementAnimation(_direction.x != 0, _isGrounded, yVelocity);
-        _rotator.RotateSprite(_direction);
+        _creatureAnimator.PlayMovementAnimation(Direction.x != 0, IsGrounded, yVelocity);
+        _rotator.RotateSprite(Direction);
     }
 
     protected virtual void OnDisable()
     {
-        _health.Hited -= Hit;
-        _health.Died -= Die;
+        Health.Hited -= Hit;
+        Health.Died -= Die;
     }  
 
     public void SetDirection(Vector2 direction)
     {
-        _direction = direction;
+        Direction = direction;
     }
 
     protected virtual float CalculateYVelocity()

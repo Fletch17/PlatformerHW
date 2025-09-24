@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthChecker : MonoBehaviour
+public class HealthGetter : MonoBehaviour
 {
     [SerializeField] private float _radius;
     [SerializeField] private LayerMask _layerMask;
 
     private int _arraySize = 5;
 
-    public bool TryCheckHealthComponent(out List<Health> healths)
+    public bool TryGetHealthComponent(out List<Health> healths)
     {
         bool isComponentExist = false;
         healths = new List<Health>();

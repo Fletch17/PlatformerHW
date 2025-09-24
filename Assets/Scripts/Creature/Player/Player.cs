@@ -22,13 +22,13 @@ public class Player : Creature
     protected override void OnEnable()
     {
         _itemPeacker.CoinPeaked += _coinCounter.Increase;
-        _itemPeacker.PotionPeaked += _health.Increase;
+        _itemPeacker.PotionPeaked += Health.Increase;
         base.OnEnable();
     }
 
     private void Update()
     {      
-        _direction = _playerInputReader.Direction;
+        Direction = _playerInputReader.Direction;
 
         if (_playerInputReader.IsAttack)
         {
@@ -39,12 +39,12 @@ public class Player : Creature
     protected override void OnDisable()
     {
         _itemPeacker.CoinPeaked -= _coinCounter.Increase;
-        _itemPeacker.PotionPeaked -= _health.Increase;
+        _itemPeacker.PotionPeaked -= Health.Increase;
         base.OnDisable();
     }
 
     protected override float CalculateYVelocity()
     {
-        return _jumper.CalculateYVelocity(_direction, _isGrounded);
+        return _jumper.CalculateYVelocity(Direction, IsGrounded);
     }       
 }
