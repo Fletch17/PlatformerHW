@@ -1,7 +1,7 @@
 public class HealButton : ChangeHealthButton
 {
-    protected override void OnEnable()
+    protected override void ChangePlayerHealth()
     {
-        CurrentButton.onClick.AddListener(() => HealthComponent.Increase(Damage));
+        HealthComponent.Increase(Damage);
     }
 }

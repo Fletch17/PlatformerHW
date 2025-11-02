@@ -1,7 +1,7 @@
 public class AttackButton : ChangeHealthButton
 {
-   protected override void OnEnable()
+    protected override void ChangePlayerHealth()
     {
-        CurrentButton.onClick.AddListener(() => HealthComponent.Decrease(Damage));
+        HealthComponent.Decrease(Damage);
     }
 }

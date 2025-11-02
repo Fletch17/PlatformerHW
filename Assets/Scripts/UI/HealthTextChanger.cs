@@ -1,30 +1,17 @@
 using TMPro;
 using UnityEngine;
 
-public class HealthTextChanger : MonoBehaviour
+public class HealthTextChanger : UIHealthChanger
 {
-    [SerializeField] private Health _health;
     private TMP_Text _text;
 
     private void Start()
     {
         _text = GetComponent<TMP_Text>();
-        UpdateHealthText();
+        ChangeValue();
     }
 
-    private void OnEnable()
-    {
-        _health.Hited += UpdateHealthText;
-        _health.Healed += UpdateHealthText;
-    }
-
-    private void OnDisable()
-    {
-        _health.Hited -= UpdateHealthText;
-        _health.Healed -= UpdateHealthText;
-    }
-
-    private void UpdateHealthText()
+    protected override void ChangeValue()
     {
         _text.text = $"{_health.Current}/{_health.Max}";
     }

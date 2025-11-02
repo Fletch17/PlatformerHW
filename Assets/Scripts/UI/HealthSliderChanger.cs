@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthSliderChanger : MonoBehaviour
+[RequireComponent(typeof(Slider))]
+public class HealthSliderChanger : UIHealthChanger
 {
-    [SerializeField] protected Health _health;
     protected Slider _slider;
     protected float _scaleDivision;
 
@@ -14,19 +14,7 @@ public class HealthSliderChanger : MonoBehaviour
         _slider.value = _health.Current * _scaleDivision;
     }
 
-    protected virtual void OnEnable()
-    {
-        _health.Healed += ChangeValue;
-        _health.Hited += ChangeValue;
-    }
-
-    protected virtual void OnDisable()
-    {
-        _health.Healed -= ChangeValue;
-        _health.Hited -= ChangeValue;
-    }
-
-    private void ChangeValue()
+    protected override void ChangeValue()
     {
         _slider.value = _health.Current * _scaleDivision;
     }

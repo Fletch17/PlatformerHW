@@ -6,31 +6,19 @@ public class SmoothHealthSliderChanger : HealthSliderChanger
     [SerializeField] private float _speed;
 
     private IEnumerator _currentCoroutine;
-
-    protected override void OnEnable()
-    {
-        _health.Healed += StartChange;
-        _health.Hited += StartChange;
-    }
-
-    protected override void OnDisable()
-    {
-        _health.Healed -= StartChange;
-        _health.Hited -= StartChange;
-    }
-
-    private void StartChange()
+    
+    protected override void ChangeValue()
     {
         if (_currentCoroutine != null)
         {
             StopCoroutine(_currentCoroutine);
         }
 
-        _currentCoroutine = ChangeValue();
+        _currentCoroutine = ChangeSliderValue();
         StartCoroutine(_currentCoroutine);
     }
 
-    private IEnumerator ChangeValue()
+    private IEnumerator ChangeSliderValue()
     {
         while (_slider.value != _health.Current * _scaleDivision)
         {

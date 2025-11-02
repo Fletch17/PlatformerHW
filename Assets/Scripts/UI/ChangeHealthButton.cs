@@ -1,27 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public abstract class ChangeHealthButton : MonoBehaviour
 {
     [SerializeField] private Health _healthComponent;
     [SerializeField] private int _damage = 1;
+    private Button _currentButton;
 
     public Health HealthComponent => _healthComponent;
     public int Damage => _damage;
 
-    public Button CurrentButton { get; protected set; }
-
     private void Awake()
     {
-        CurrentButton = GetComponent<Button>();
+        _currentButton = GetComponent<Button>();
     }
 
-    protected abstract void OnEnable();
+    protected void OnEnable()
+    {
+        _currentButton.onClick.AddListener(ChangePlayerHealth);
+    }
 
     private void OnDisable()
     {
-        CurrentButton.onClick.RemoveAllListeners();
+        _currentButton.onClick.RemoveListener(ChangePlayerHealth);
     }
+
+    protected abstract void ChangePlayerHealth();
 }
