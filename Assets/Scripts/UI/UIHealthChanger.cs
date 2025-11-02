@@ -3,8 +3,8 @@ using UnityEngine;
 public abstract class UIHealthChanger : MonoBehaviour
 {
     [SerializeField] protected Health _health;
-   
-   private void OnEnable()
+
+    private void OnEnable()
     {
         _health.Healed += ChangeValue;
         _health.Hited += ChangeValue;
