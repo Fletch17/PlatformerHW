@@ -7,8 +7,12 @@ public class Health : MonoBehaviour
 
     private int _current;
 
+    public event Action Healed;
     public event Action Hited;
     public event Action Died;
+
+    public int Max => _max;
+    public int Current => _current;
 
     private void Awake()
     {
@@ -24,6 +28,7 @@ public class Health : MonoBehaviour
             _current = _max;
         }
 
+        Healed?.Invoke();
         Debug.Log(gameObject+": Increase. Curr: " +_current);
     }
 

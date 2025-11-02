@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "PlatformerHW.sln"
+    "dotnet.defaultSolution": "PlatformerHW.sln",
+    "dotnet.debug.suppressInvalidDebugTypeWarning": true
 }
