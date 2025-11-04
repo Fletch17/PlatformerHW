@@ -2,18 +2,18 @@ using UnityEngine;
 
 public abstract class UIHealthChanger : MonoBehaviour
 {
-    [SerializeField] protected Health _health;
+    [SerializeField] protected Health TargetHealthComponent;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        _health.Healed += ChangeValue;
-        _health.Hited += ChangeValue;
+        TargetHealthComponent.Healed += ChangeValue;
+        TargetHealthComponent.Hited += ChangeValue;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
-        _health.Healed -= ChangeValue;
-        _health.Hited -= ChangeValue;
+        TargetHealthComponent.Healed -= ChangeValue;
+        TargetHealthComponent.Hited -= ChangeValue;
     }
 
     protected abstract void ChangeValue();

@@ -6,7 +6,7 @@ public class SmoothHealthSliderChanger : HealthSliderChanger
     [SerializeField] private float _speed;
 
     private IEnumerator _currentCoroutine;
-    
+
     protected override void ChangeValue()
     {
         if (_currentCoroutine != null)
@@ -20,9 +20,9 @@ public class SmoothHealthSliderChanger : HealthSliderChanger
 
     private IEnumerator ChangeSliderValue()
     {
-        while (_slider.value != _health.Current * _scaleDivision)
+        while (HealthSlider.value != TargetHealthComponent.Current * ScaleDivision)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, _health.Current * _scaleDivision, _speed * _scaleDivision);
+            HealthSlider.value = Mathf.MoveTowards(HealthSlider.value, TargetHealthComponent.Current * ScaleDivision, _speed * ScaleDivision);
             yield return null;
         }
     }
